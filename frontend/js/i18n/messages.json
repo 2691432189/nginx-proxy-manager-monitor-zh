@@ -352,9 +352,9 @@
     },
     "footer": {
       "fork-me": "在Github上Fork项目",
-      "copy": "&copy; 2022 <a href=\"{url}\" target=\"_blank\">jc21.com</a>.",
-      "theme": "Theme by <a href=\"{url}\" target=\"_blank\">Tabler</a>.",
-      "translate": "中文翻译来自 <a href=\"{url}\" target=\"_blank\">xiaoxinrpo</a>."
+      "copy": "&copy; 2022 <a href=\"{url}\" target=\"_blank\">jc21.com</a>, ",
+      "theme": "Theme by <a href=\"{url}\" target=\"_blank\">Tabler</a>, ",
+      "translate": "汉化版由 <a href=\"{url}\" target=\"_blank\">xiaoxinpro</a> 提供. "
     },
     "dashboard": {
       "title": "你好 {name}"
@@ -455,10 +455,10 @@
       "search": "搜索主机…"
     },
     "streams": {
-      "title": "Stream",
-      "empty": "目前还没有Stream",
-      "add": "添加Stream",
-      "form-title": "{id, select, undefined{新建} other{编辑}} Stream",
+      "title": "端口转发",
+      "empty": "目前还没有端口转发",
+      "add": "添加端口转发",
+      "form-title": "{id, select, undefined{新建} other{编辑}} 端口转发",
       "incoming-port": "入站端口",
       "forwarding-host": "转发主机",
       "forwarding-port": "转发端口",
@@ -468,10 +468,10 @@
       "protocol": "协议",
       "tcp": "TCP",
       "udp": "UDP",
-      "delete": "删除Stream",
-      "delete-confirm": "你确定你要删除这个Stream吗？",
-      "help-title": "什么是Stream？",
-      "help-content": "Stream作为Nginx的一个相对较新的功能，可以直接转发TCP/UDP流量到网络上的另一台计算机。\n如果你正在运行游戏服务器、FTP或SSH服务器，这个功能就会很有用。",
+      "delete": "删除端口转发",
+      "delete-confirm": "你确定删除这个端口转发吗？",
+      "help-title": "什么是端口转发？",
+      "help-content": "端口转发是Nginx的一个相对较新的功能，可以直接转发TCP/UDP流量到网络上的另一台计算机。\n如果你正在运行游戏服务器、FTP或SSH服务器，这个功能就会很有用。",
       "search": "搜索入站端口…"
     },
     "certificates": {
@@ -560,7 +560,7 @@
       "proxy-host": "代理服务",
       "redirection-host": "重定向",
       "dead-host": "错误页面",
-      "stream": "Stream",
+      "stream": "端口转发",
       "user": "用户",
       "certificate": "证书",
       "access-list": "通信规则",
