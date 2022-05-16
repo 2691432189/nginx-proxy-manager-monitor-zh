@@ -81,8 +81,8 @@ docker-compose up -d
 
 ### 支付宝扫码捐赠
 
-![支付宝扫码捐赠](https://github.com/xiaoxinpro/xxjzWeb/blob/master/Public/Home/i/alipay.png)
+![支付宝扫码捐赠](https://image.xiaoxin.pro/2022/05/16/1f1a5f025c13c.png)
 
 ### 微信扫描捐赠
 
-![微信扫描捐赠](https://github.com/xiaoxinpro/xxjzWeb/blob/master/Public/Home/i/wechat.png)
+![微信扫描捐赠](https://image.xiaoxin.pro/2022/05/16/9c9906b102b29.png)

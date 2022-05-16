@@ -9,12 +9,7 @@ cd "${DIR}/.."
 docker buildx create --name "Buildx-NPM" || echo
 docker buildx use "Buildx-NPM"
 
-docker buildx build \
-	-t chishin/nginx-proxy-manager-zh:2.9.18 \
-	-f docker/Dockerfile-zh \
-	--platform linux/amd64,linux/arm64,linux/arm/7 \
-	--progress plain \
-	. --push
+docker buildx build -f docker/Dockerfile-zh -t "chishin/nginx-proxy-manager-zh:2.9.18" --platform linux/amd64,linux/arm64,linux/arm/7 . --push
 
 docker buildx rm "Buildx-NPM"
 
