@@ -1,5 +1,5 @@
 
-[Original English README](https://github.com/xiaoxinpro/nginx-proxy-manager-zh/blob/develop-zh/README.md)
+[Original English README](https://github.com/xiaoxinpro/nginx-proxy-manager-zh/blob/develop-zh/README-en.md)
 
 <p align="center">
     <img src="https://nginxproxymanager.com/github.png">
