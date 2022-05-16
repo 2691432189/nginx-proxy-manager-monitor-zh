@@ -333,9 +333,9 @@
       "title": "登录到您的账户"
     },
     "main": {
-      "app": "Nginx代理管理器",
+      "app": "Nginx 代理管理器",
       "version": "v{version}",
-      "welcome": "欢迎来到Nginx代理管理器",
+      "welcome": "欢迎来到 Nginx 代理管理器",
       "logged-in": "您的登录身份是 {name}",
       "unknown-error": "加载出错，请重新加载应用程序。",
       "unknown-user": "未知用户",
@@ -375,8 +375,8 @@
       "with-le": "使用Let's Encrypt",
       "no-ssl": "该主机将不使用HTTPS",
       "advanced": "高级",
-      "advanced-warning": "在此输入你的自定义Nginx配置，风险自负!",
-      "advanced-config": "自定义Nginx配置",
+      "advanced-warning": "在此输入你的自定义 Nginx 配置，风险自负!",
+      "advanced-config": "自定义 Nginx 配置",
       "advanced-config-var-headline": "这些代理详情可以作为nginx的变量。",
       "advanced-config-header-info": "请注意，这里添加的任何add_header或set_header配置都不会被nginx使用。你将不得不添加一个自定义的位置'/'，并在那里的自定义配置中添加头信息。",
       "hsts-enabled": "启用了HSTS",
