@@ -12,13 +12,17 @@
 
 ## 快速部署
 
-1. 安装Docker和Docker-compose
+### 1. 环境部署
+
+安装Docker和Docker-compose
 
 - [Docker官方安装文档（英文）](https://docs.docker.com/install/)
 - [Docker-Compose官方安装文档（英文）](https://docs.docker.com/compose/install/)
 - **[Docker和Docker-compose安装文档（中文）](https://blog.csdn.net/zhangzejin3883/article/details/124778945)**
 
-2. 创建一个 `docker-compose.yml` 文件:
+### 2. 创建YAML文件
+
+创建一个 `docker-compose.yml` 文件:
 
 ```yml
 version: '3'
@@ -35,13 +39,13 @@ services:
       - ./letsencrypt:/etc/letsencrypt
 ```
 
-3. 部署运行
+### 3. 部署运行
 
 ```bash
 docker-compose up -d
 ```
 
-4. 登录管理页面
+### 4. 登录管理页面
 
 当你的docker容器成功运行，使用浏览器访问`81`端口。
 有些时候需要稍等一段时间。
@@ -56,9 +60,10 @@ Password: changeme
 
 使用这个默认用户登录后，系统会立即要求您修改详细信息和密码。
 
-5. 快速升级
+### 5. 快速升级
 
 ```bash
+docker-compose down
 docker-compose pull
 docker-compose up -d
 ```
@@ -67,6 +72,8 @@ docker-compose up -d
 
 ## 更多
 
+### 1. 官方文档（英文）
+
 关于本应用的更多用法请访问官方文档：
 
 - [项目源码](https://github.com/NginxProxyManager/nginx-proxy-manager)
@@ -74,6 +81,14 @@ docker-compose up -d
 - [安装手册](https://nginxproxymanager.com/setup/)
 - [高级配置](https://nginxproxymanager.com/advanced-config/#best-practice-use-a-docker-network)
 - [常见问题](https://nginxproxymanager.com/faq/#do-i-have-to-use-docker)
+
+### 2. 替换中文镜像
+
+当你使用官方示例的`docker-compose`时需要注意，将image镜像`jc21/nginx-proxy-manager`替换为`chishin/nginx-proxy-manager-zh`即可实现中文部署。
+
+### 3. 关于中文镜像
+
+中文镜像并没有重新构建后端代码，由[Dockerfile-zh](https://github.com/xiaoxinpro/nginx-proxy-manager-zh/blob/develop-zh/docker/Dockerfile-zh)文件可以得知，中文镜像基于官方镜像替换前端代码来实现的，所以中文版本的全部功能与官方版本完全相同，只是显示界面的文字不同的区别。
 
 ## 捐赠
 
