@@ -132,7 +132,7 @@
       "access-list": "Access List",
       "allow-websocket-upgrade": "Websockets Support",
       "ignore-invalid-upstream-ssl": "Ignore Invalid SSL",
-      "custom-forward-host-help": "Add a path for sub-folder forwarding.\nExample: 203.0.113.25/path",
+      "custom-forward-host-help": "Add a path for sub-folder forwarding.\nExample: 203.0.113.25/path/",
       "search": "Search Host…"
     },
     "redirection-hosts": {
@@ -205,7 +205,7 @@
       "reachability-wrong-data": "There is a server found at this domain but it returned an unexpected data. Is it the NPM server? Please make sure your domain points to the IP where your NPM instance is running.",
       "reachability-other": "There is a server found at this domain but it returned an unexpected status code {code}. Is it the NPM server? Please make sure your domain points to the IP where your NPM instance is running.",
       "download": "Download",
-      "renew-title": "Renew Let'sEncrypt Certificate",
+      "renew-title": "Renew Let's Encrypt Certificate",
       "search": "Search Certificate…"
     },
     "access-lists": {
@@ -425,7 +425,7 @@
       "access-list": "通信规则",
       "allow-websocket-upgrade": "支持WebSockets",
       "ignore-invalid-upstream-ssl": "忽略无效的SSL",
-      "custom-forward-host-help": "为子目录转发添加路径。\n例如：203.0.113.25/路径",
+      "custom-forward-host-help": "为子目录转发添加路径。\n例如：203.0.113.25/路径/",
       "search": "搜索主机…"
     },
     "redirection-hosts": {
@@ -498,7 +498,7 @@
       "reachability-wrong-data": "在这个域名中发现了一个服务器，但它返回了一个意外的数据。它是指向本NPM服务器吗？请确保你的域名指向本NPM实例的IP。",
       "reachability-other": "在这个域名中发现了一个服务器，但它返回了一个意外的状态代码{code}。它是指向本NPM服务器吗？请确保你的域名指向本NPM实例的IP。",
       "download": "下载",
-      "renew-title": "更新Let'sEncrypt证书",
+      "renew-title": "更新Let's Encrypt证书",
       "search": "搜索证书…"
     },
     "access-lists": {
