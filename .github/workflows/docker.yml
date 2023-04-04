@@ -22,7 +22,7 @@ jobs:
         run: |
           ls -l &&\
           cd scripts &&\
+          chmod +x buildx-zh &&\
           ls -l &&\
-          git update-index --chmod=+x buildx-zh &&\
           ./buildx-zh
           
