@@ -6,4 +6,4 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "${DIR}/.."
 
-docker build -t chishin/nginx-proxy-manager-zh:2.9.19 -f docker/Dockerfile-zh .
+docker build -t chishin/nginx-proxy-manager-zh:2.9.22 -f docker/Dockerfile-zh .
