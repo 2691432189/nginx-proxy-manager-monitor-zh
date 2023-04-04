@@ -1,0 +1,29 @@
+name: GitHub Actions Docker Buildx
+on:
+ workflow_dispatch:
+ push:
+  branches:
+   - develop-zh
+   - develop-zh_*
+ pull_request:
+   branches: [ develop-zh ]
+jobs:
+  Docker-Buildx:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Login docker hub
+        env:
+          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        run: echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+      - name: Docker Setup Buildx
+        uses: docker/setup-buildx-action@v2.5.0
+      - name: Build Dockerfile
+        run: |
+          ls -l &&\
+          cd scripts &&\
+          ls -l &&\
+          ./buildx-zh
+          
