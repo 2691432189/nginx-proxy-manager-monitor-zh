@@ -21,6 +21,5 @@ jobs:
       - name: Build Dockerfile
         run: |
           chmod -R 755 scripts && ls -l &&\
-          cd scripts && ls -l &&\
-          ./buildx-zh
+          ./scripts/buildx-zh
           

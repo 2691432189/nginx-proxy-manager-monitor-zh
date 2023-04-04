@@ -5,6 +5,8 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "${DIR}/.."
 
+echo `pwd && ls`
+
 # Buildx Builder
 docker buildx create --name "Buildx-NPM" || echo
 docker buildx use "Buildx-NPM"
