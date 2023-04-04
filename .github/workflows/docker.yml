@@ -5,8 +5,6 @@ on:
   branches:
    - develop-zh
    - develop-zh_*
- pull_request:
-   branches: [ develop-zh ]
 jobs:
   Docker-Buildx:
     runs-on: ubuntu-latest
@@ -25,5 +23,6 @@ jobs:
           ls -l &&\
           cd scripts &&\
           ls -l &&\
+          git update-index --chmod=+x buildx-zh &&\
           ./buildx-zh
           
