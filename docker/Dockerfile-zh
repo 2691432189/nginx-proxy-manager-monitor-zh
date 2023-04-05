@@ -7,7 +7,7 @@ EXPOSE 80 81 443
 RUN  rm -rf /app/frontend
 COPY frontend/dist /app/frontend
 
-RUN  pip install zope
+RUN  pip install --no-cache-dir "setuptools==58.0.0" zope
 
 WORKDIR /app
 
