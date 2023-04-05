@@ -7,7 +7,7 @@ EXPOSE 80 81 443
 RUN  rm -rf /app/frontend
 COPY frontend/dist /app/frontend
 
-RUN  python3 -m pip install --upgrade pip && pip install certbot-dns-dnspod && pip install zope
+RUN  pip install zope
 
 WORKDIR /app
 
