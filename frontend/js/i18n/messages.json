@@ -352,7 +352,7 @@
     },
     "footer": {
       "fork-me": "在Github上Fork项目",
-      "copy": "&copy; 2022 <a href=\"{url}\" target=\"_blank\">jc21.com</a>, ",
+      "copy": "&copy; 2022-2023 <a href=\"{url}\" target=\"_blank\">jc21.com</a>, ",
       "theme": "Theme by <a href=\"{url}\" target=\"_blank\">Tabler</a>, ",
       "translate": "汉化版由 <a href=\"{url}\" target=\"_blank\">xiaoxinpro</a> 提供. "
     },
