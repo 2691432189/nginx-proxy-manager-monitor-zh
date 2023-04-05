@@ -4,8 +4,9 @@ ENV NPM_LANGUAGE="zh"
 
 EXPOSE 80 81 443
 
-RUN  rm -rf /app/frontend
+RUN  rm -rf /app/frontend /var/www/html/index.html
 COPY frontend/dist /app/frontend
+COPY docker/rootfs/var/www/html/index.html /var/www/html/index.html
 
 WORKDIR /app
 
