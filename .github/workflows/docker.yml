@@ -4,8 +4,8 @@ on:
  push:
   branches:
    - 'develop-zh'
-  release:
-    types: [published]
+ release:
+   types: [published]
 jobs:
   Docker-Buildx:
     runs-on: ubuntu-latest
