@@ -159,6 +159,7 @@ module.exports = Mn.View.extend({
             delete data.path;
 
             // Manipulate
+            data.monitor_port            = parseInt(data.monitor_port, 10);
             data.forward_port            = parseInt(data.forward_port, 10);
             data.block_exploits          = !!data.block_exploits;
             data.caching_enabled         = !!data.caching_enabled;

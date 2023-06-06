@@ -32,6 +32,11 @@
       "minimum": 1,
       "maximum": 65535
     },
+    "monitor_port": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 65535
+    },
     "certificate_id": {
       "$ref": "../definitions.json#/definitions/certificate_id"
     },
@@ -79,6 +84,7 @@
           "forward_scheme",
           "forward_host",
           "forward_port",
+          "monitor_port",
           "path"
         ],
         "additionalProperties": false,
@@ -98,6 +104,9 @@
           },
           "forward_port": {
             "$ref": "#/definitions/forward_port"
+          },
+          "monitor_port": {
+            "$ref": "#/definitions/monitor_port"
           },
           "forward_path": {
             "type": "string"
@@ -130,6 +139,9 @@
     },
     "forward_port": {
       "$ref": "#/definitions/forward_port"
+    },
+    "monitor_port": {
+      "$ref": "#/definitions/monitor_port"
     },
     "certificate_id": {
       "$ref": "#/definitions/certificate_id"
@@ -206,7 +218,8 @@
           "domain_names",
           "forward_scheme",
           "forward_host",
-          "forward_port"
+          "forward_port",
+          "monitor_port"
         ],
         "properties": {
           "domain_names": {
@@ -220,6 +233,9 @@
           },
           "forward_port": {
             "$ref": "#/definitions/forward_port"
+          },
+          "monitor_port": {
+            "$ref": "#/definitions/monitor_port"
           },
           "certificate_id": {
             "$ref": "#/definitions/certificate_id"
@@ -293,6 +309,9 @@
           },
           "forward_port": {
             "$ref": "#/definitions/forward_port"
+          },
+          "monitor_port": {
+            "$ref": "#/definitions/monitor_port"
           },
           "certificate_id": {
             "$ref": "#/definitions/certificate_id"

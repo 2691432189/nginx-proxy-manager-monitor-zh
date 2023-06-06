@@ -88,6 +88,8 @@ const internalProxyHost = {
 				// Audit log
 				data.meta = _.assign({}, data.meta || {}, row.meta);
 
+				console.log('data..............',data)
+
 				// Add to audit log
 				return internalAuditLog.add(access, {
 					action:      'created',

@@ -27,10 +27,16 @@
                 <!-- Details -->
                 <div role="tabpanel" class="tab-pane active" id="details">
                     <div class="row">
-                        <div class="col-sm-12 col-md-12">
+                        <div class="col-sm-8 col-md-8">
                             <div class="form-group">
                                 <label class="form-label"><%- i18n('all-hosts', 'domain-names') %> <span class="form-required">*</span></label>
                                 <input type="text" name="domain_names" class="form-control" id="input-domains" value="<%- domain_names.join(',') %>" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <div class="form-group">
+                                <label class="form-label"><%- i18n('proxy-hosts', 'monitor-port') %> <span class="form-required">*</span></label>
+                                <input name="monitor_port" type="number" class="form-control text-monospace" placeholder="80" value="<%- monitor_port %>" required>
                             </div>
                         </div>
                         <div class="col-sm-3 col-md-3">

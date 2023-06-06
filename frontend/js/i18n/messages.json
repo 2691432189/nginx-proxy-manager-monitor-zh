@@ -417,6 +417,7 @@
       "form-title": "{id, select, undefined{新建} other{编辑}} 代理服务",
       "forward-scheme": "协议",
       "forward-host": "转发主机/IP",
+      "monitor-port": "监听端口",
       "forward-port": "转发端口",
       "delete": "删除代理服务",
       "delete-confirm": "你确定要删除代理服务 <strong>{domains}</strong> 吗？",
