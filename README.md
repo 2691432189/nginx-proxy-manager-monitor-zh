@@ -6,9 +6,10 @@
     <br>
 </p>
 
-本项目是基于 [NginxProxyManager/nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager) 翻译的中文版本，该项目属于一个预构建的docker映像，它可以让你轻松地部署到你的网站上运行，包括免费的SSL，而不需要知道太多关于 Nginx 或 Let's Encrypt 的信息。  
+本项目是基于 [nginx-proxy-manager-zh](https://github.com/xiaoxinpro/nginx-proxy-manager-zh) 的可监听端口版本，该项目属于一个预构建的docker映像，它可以让你轻松地部署到你的网站上运行，包括免费的SSL，而不需要知道太多关于 Nginx 或 Let's Encrypt 的信息。  
 
 ![](http://image.xiaoxin.pro/2022/05/16/75687b5bfffbe.png)
+![](https://webcdn.koufengqi.cn/other/72d55ee6195f694b54a724b9b708e94.png)
 
 ## 快速部署
 
@@ -117,15 +118,3 @@ exit
 ```
 
 最后刷新浏览器，再次使用DNSPod创建证书即可。
-
-## 捐赠
-
-如果您觉得本项目对你有帮助，欢迎给予我们一定的捐助来翻译项目的长期发展。
-
-### 支付宝扫码捐赠
-
-![支付宝扫码捐赠](https://image.xiaoxin.pro/2022/05/16/1f1a5f025c13c.png)
-
-### 微信扫描捐赠
-
-![微信扫描捐赠](https://image.xiaoxin.pro/2022/05/16/9c9906b102b29.png)
