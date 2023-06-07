@@ -34,6 +34,8 @@ const internalProxyHost = {
 					domain_name_check_promises.push(internalHost.isHostnameTaken(domain_name));
 				});
 
+				console.log('data111111111111',JSON.stringify(data))
+
 				return Promise.all(domain_name_check_promises)
 					.then((check_results) => {
 						check_results.map(function (result) {
@@ -48,6 +50,8 @@ const internalProxyHost = {
 				data.owner_user_id = access.token.getUserId(1);
 				data               = internalHost.cleanSslHstsData(data);
 
+				console.log('data2222222222222222',JSON.stringify(data))
+
 				return proxyHostModel
 					.query()
 					.insertAndFetch(data)
@@ -57,6 +61,7 @@ const internalProxyHost = {
 				if (create_certificate) {
 					return internalCertificate.createQuickCertificate(access, data)
 						.then((cert) => {
+							console.log('data333333333333',JSON.stringify(data))
 							// update host with cert id
 							return internalProxyHost.update(access, {
 								id:             row.id,
@@ -64,20 +69,24 @@ const internalProxyHost = {
 							});
 						})
 						.then(() => {
+							console.log('data4444444444444',JSON.stringify(data))
 							return row;
 						});
 				} else {
+					console.log('data555555555555555555',JSON.stringify(data))
 					return row;
 				}
 			})
 			.then((row) => {
 				// re-fetch with cert
+				console.log('data666666666666666666666',JSON.stringify(data))
 				return internalProxyHost.get(access, {
 					id:     row.id,
 					expand: ['certificate', 'owner', 'access_list.[clients,items]']
 				});
 			})
 			.then((row) => {
+				console.log('data7777777777777777777',JSON.stringify(data))
 				// Configure nginx
 				return internalNginx.configure(proxyHostModel, 'proxy_host', row)
 					.then(() => {
@@ -87,9 +96,7 @@ const internalProxyHost = {
 			.then((row) => {
 				// Audit log
 				data.meta = _.assign({}, data.meta || {}, row.meta);
-
-				console.log('data..............',data)
-
+				console.log('data888888888888888888',JSON.stringify(data))
 				// Add to audit log
 				return internalAuditLog.add(access, {
 					action:      'created',

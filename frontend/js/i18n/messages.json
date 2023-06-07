@@ -354,7 +354,8 @@
       "fork-me": "在Github上Fork项目",
       "copy": "&copy; 2022-2023 <a href=\"{url}\" target=\"_blank\">jc21.com</a>, ",
       "theme": "Theme by <a href=\"{url}\" target=\"_blank\">Tabler</a>, ",
-      "translate": "汉化版由 <a href=\"{url}\" target=\"_blank\">xiaoxinpro</a> 提供. "
+      "translate": "汉化版由 <a href=\"{url}\" target=\"_blank\">xiaoxinpro</a> 提供. ",
+      "translate-two": "监听版由 <a href=\"{url}\" target=\"_blank\">2691432189</a> 提供. "
     },
     "dashboard": {
       "title": "你好 {name}"
@@ -417,7 +418,8 @@
       "form-title": "{id, select, undefined{新建} other{编辑}} 代理服务",
       "forward-scheme": "协议",
       "forward-host": "转发主机/IP",
-      "monitor-port": "监听端口",
+      "monitor-port": "监听HTTP端口",
+      "monitor-ports": "监听HTTPS端口",
       "forward-port": "转发端口",
       "delete": "删除代理服务",
       "delete-confirm": "你确定要删除代理服务 <strong>{domains}</strong> 吗？",

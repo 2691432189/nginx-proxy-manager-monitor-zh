@@ -69,6 +69,8 @@ exports.up = function (knex/*, Promise*/) {
 				table.json('domain_names').notNull();
 				table.string('forward_ip').notNull();
 				table.integer('forward_port').notNull().unsigned();
+				table.integer('monitor_port').notNull().unsigned();
+				table.integer('monitor_ports').notNull().unsigned();
 				table.integer('access_list_id').notNull().unsigned().defaultTo(0);
 				table.integer('certificate_id').notNull().unsigned().defaultTo(0);
 				table.integer('ssl_forced').notNull().unsigned().defaultTo(0);

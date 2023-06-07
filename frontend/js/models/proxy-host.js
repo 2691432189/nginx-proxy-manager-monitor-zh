@@ -10,6 +10,7 @@ const model = Backbone.Model.extend({
             modified_on:             null,
             domain_names:            [],
             monitor_port:            null,
+            monitor_ports:           null,
             forward_scheme:          'http',
             forward_host:            '',
             forward_port:            null,
