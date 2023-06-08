@@ -128,9 +128,9 @@ const internalProxyHost = {
 					return Promise.all(domain_name_check_promises)
 						.then((check_results) => {
 							check_results.map(function (result) {
-								if (result.is_taken) {
-									throw new error.ValidationError(result.hostname + ' is already in use');
-								}
+								// if (result.is_taken) {
+								// 	throw new error.ValidationError(result.hostname + ' is already in use');
+								// }
 							});
 						});
 				}
