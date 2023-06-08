@@ -29,7 +29,7 @@
 version: '3'
 services:
   app:
-    image: '2691432189/nginx-proxy-manager-monitor-zh:2.9.22'
+    image: '2691432189/nginx-proxy-manager-monitor-zh'
     restart: always
     ports:
       - '80:80'
