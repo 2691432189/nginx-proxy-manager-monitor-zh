@@ -5,4 +5,4 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "${DIR}/../.."
 
-docker build -t nginx-proxy-manager-monitor-zh:2.9.22 -f docker/Dockerfile-zh .
+docker build -t 2691432189/nginx-proxy-manager-monitor-zh:2.10.3 -f docker/Dockerfile-zh .
