@@ -9,6 +9,8 @@
 		"domain_names",
 		"forward_host",
 		"forward_port",
+		"listen_port",
+		"listen_port_ssl",
 		"access_list_id",
 		"certificate_id",
 		"ssl_forced",
@@ -53,6 +55,20 @@
 			"minimum": 1,
 			"maximum": 65535,
 			"example": 8080
+		},
+		"listen_port": {
+			"description": "The port Nginx listens on for HTTP requests on this host",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 65535,
+			"example": 80
+		},
+		"listen_port_ssl": {
+			"description": "The port Nginx listens on for HTTPS requests on this host. Only used when a certificate is selected",
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 65535,
+			"example": 443
 		},
 		"access_list_id": {
 			"$ref": "../common.json#/properties/access_list_id"

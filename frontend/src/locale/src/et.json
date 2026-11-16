@@ -143,6 +143,9 @@
 	"action.view-details": {
 		"defaultMessage": "Vaata üksikasju"
 	},
+	"app.title": {
+		"defaultMessage": "Nginx Proxy Manager"
+	},
 	"auditlogs": {
 		"defaultMessage": "Auditilogid"
 	},
@@ -401,6 +404,12 @@
 	"error.access.duplicate-usernames": {
 		"defaultMessage": "Kasutajanimed peavad olema unikaalsed"
 	},
+	"error.generic": {
+		"defaultMessage": "Midagi läks valesti. Palun proovi uuesti."
+	},
+	"error.invalid-2fa": {
+		"defaultMessage": "Vale kinnituskood"
+	},
 	"error.invalid-auth": {
 		"defaultMessage": "Vale e-post või parool"
 	},
@@ -436,6 +445,15 @@
 	},
 	"footer.github-fork": {
 		"defaultMessage": "Tee GitHubis fork"
+	},
+	"footer.theme": {
+		"defaultMessage": "Teema autor"
+	},
+	"footer.translate": {
+		"defaultMessage": "Hiinakeelne tõlge: <link>xiaoxinpro</link>."
+	},
+	"footer.translate-two": {
+		"defaultMessage": "Jälgimisversioon: <link>2691432189</link>."
 	},
 	"form.unsaved-changes": {
 		"defaultMessage": "Sul on salvestamata muudatusi. Kas oled kindel, et soovid need tühistada?"
@@ -484,6 +502,9 @@
 	},
 	"location.filter": {
 		"defaultMessage": "Filtreeri tee või sihtkoha järgi"
+	},
+	"location.label": {
+		"defaultMessage": "Asukoht"
 	},
 	"login.2fa-code": {
 		"defaultMessage": "Kinnituskood"
@@ -547,6 +568,12 @@
 	},
 	"logs.truncated-warning": {
 		"defaultMessage": "Kuvatakse ainult faili kõige uuem osa."
+	},
+	"nav.toggle": {
+		"defaultMessage": "Lülita navigeerimine"
+	},
+	"nav.user-menu": {
+		"defaultMessage": "Ava kasutajamenüü"
 	},
 	"nginx-config.label": {
 		"defaultMessage": "Kohandatud Nginx seadistus"
@@ -677,6 +704,18 @@
 	"proxy-host.forward-host": {
 		"defaultMessage": "Edastuse hostinimi / IP"
 	},
+	"proxy-host.listen-port": {
+		"defaultMessage": "HTTP kuulamisport"
+	},
+	"proxy-host.listen-port-help": {
+		"defaultMessage": "Port, millel konteiner kuulab HTTP päringuid. Avalda see Dockeris, näiteks -p 8080:8080."
+	},
+	"proxy-host.listen-port-ssl": {
+		"defaultMessage": "HTTPS kuulamisport"
+	},
+	"proxy-host.listen-port-ssl-help": {
+		"defaultMessage": "Kasutatakse ainult siis, kui sertifikaat on valitud."
+	},
 	"proxy-hosts": {
 		"defaultMessage": "Puhverserverid"
 	},
@@ -794,8 +833,20 @@
 	"streams.udp": {
 		"defaultMessage": "UDP"
 	},
+	"table.empty": {
+		"defaultMessage": "Kirjeid ei ole"
+	},
 	"test": {
 		"defaultMessage": "Testi"
+	},
+	"unhealthy.subtitle": {
+		"defaultMessage": "Jätkame kontrollimist ja loodame peagi tagasi olla!"
+	},
+	"unhealthy.title": {
+		"defaultMessage": "API pole terve."
+	},
+	"unknown": {
+		"defaultMessage": "Teadmata"
 	},
 	"update-available": {
 		"defaultMessage": "Uuendus saadaval: {latestVersion}"

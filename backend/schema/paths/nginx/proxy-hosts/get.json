@@ -42,6 +42,8 @@
 									],
 									"forward_host": "127.0.0.1",
 									"forward_port": 8081,
+									"listen_port": 80,
+									"listen_port_ssl": 443,
 									"access_list_id": 1,
 									"certificate_id": 1,
 									"ssl_forced": false,

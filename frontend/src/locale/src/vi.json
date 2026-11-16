@@ -143,6 +143,9 @@
 	"action.view-details": {
 		"defaultMessage": "Xem chi tiết"
 	},
+	"app.title": {
+		"defaultMessage": "Nginx Proxy Manager"
+	},
 	"auditlogs": {
 		"defaultMessage": "Nhật ký hoạt động"
 	},
@@ -401,6 +404,12 @@
 	"error.access.duplicate-usernames": {
 		"defaultMessage": "Tên người dùng xác thực không được trùng nhau"
 	},
+	"error.generic": {
+		"defaultMessage": "Đã xảy ra lỗi. Vui lòng thử lại."
+	},
+	"error.invalid-2fa": {
+		"defaultMessage": "Mã xác minh không hợp lệ"
+	},
 	"error.invalid-auth": {
 		"defaultMessage": "Email hoặc mật khẩu không hợp lệ"
 	},
@@ -436,6 +445,15 @@
 	},
 	"footer.github-fork": {
 		"defaultMessage": "Fork dự án này trên Github"
+	},
+	"footer.theme": {
+		"defaultMessage": "Giao diện bởi"
+	},
+	"footer.translate": {
+		"defaultMessage": "Bản dịch tiếng Trung bởi <link>xiaoxinpro</link>."
+	},
+	"footer.translate-two": {
+		"defaultMessage": "Bản giám sát bởi <link>2691432189</link>."
 	},
 	"form.unsaved-changes": {
 		"defaultMessage": "Bạn có các thay đổi chưa được lưu. Bạn có chắc chắn muốn hủy bỏ chúng không?"
@@ -484,6 +502,9 @@
 	},
 	"location.filter": {
 		"defaultMessage": "Lọc theo đường dẫn hoặc đích"
+	},
+	"location.label": {
+		"defaultMessage": "Vị trí"
 	},
 	"login.2fa-code": {
 		"defaultMessage": "Mã xác minh"
@@ -547,6 +568,12 @@
 	},
 	"logs.truncated-warning": {
 		"defaultMessage": "Chỉ hiển thị phần mới nhất của tệp này."
+	},
+	"nav.toggle": {
+		"defaultMessage": "Chuyển đổi điều hướng"
+	},
+	"nav.user-menu": {
+		"defaultMessage": "Mở menu người dùng"
 	},
 	"nginx-config.label": {
 		"defaultMessage": "Cấu hình Nginx tùy chỉnh"
@@ -677,6 +704,18 @@
 	"proxy-host.forward-host": {
 		"defaultMessage": "Hostname / IP đích"
 	},
+	"proxy-host.listen-port": {
+		"defaultMessage": "Cổng lắng nghe HTTP"
+	},
+	"proxy-host.listen-port-help": {
+		"defaultMessage": "Cổng container lắng nghe cho HTTP. Hãy công bố cổng này trong Docker, ví dụ -p 8080:8080."
+	},
+	"proxy-host.listen-port-ssl": {
+		"defaultMessage": "Cổng lắng nghe HTTPS"
+	},
+	"proxy-host.listen-port-ssl-help": {
+		"defaultMessage": "Chỉ được dùng khi đã chọn chứng chỉ."
+	},
 	"proxy-hosts": {
 		"defaultMessage": "Máy chủ proxy"
 	},
@@ -794,8 +833,20 @@
 	"streams.udp": {
 		"defaultMessage": "UDP"
 	},
+	"table.empty": {
+		"defaultMessage": "Không có dữ liệu"
+	},
 	"test": {
 		"defaultMessage": "Kiểm tra"
+	},
+	"unhealthy.subtitle": {
+		"defaultMessage": "Chúng tôi sẽ tiếp tục kiểm tra và hy vọng sớm hoạt động trở lại!"
+	},
+	"unhealthy.title": {
+		"defaultMessage": "API không hoạt động bình thường."
+	},
+	"unknown": {
+		"defaultMessage": "Không xác định"
 	},
 	"update-available": {
 		"defaultMessage": "Đã có bản cập nhật: {latestVersion}"

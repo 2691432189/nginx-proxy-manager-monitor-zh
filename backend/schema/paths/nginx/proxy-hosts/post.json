@@ -36,6 +36,12 @@
 						"forward_port": {
 							"$ref": "../../../components/proxy-host-object.json#/properties/forward_port"
 						},
+						"listen_port": {
+							"$ref": "../../../components/proxy-host-object.json#/properties/listen_port"
+						},
+						"listen_port_ssl": {
+							"$ref": "../../../components/proxy-host-object.json#/properties/listen_port_ssl"
+						},
 						"certificate_id": {
 							"$ref": "../../../components/proxy-host-object.json#/properties/certificate_id"
 						},
@@ -108,6 +114,8 @@
 								],
 								"forward_host": "127.0.0.1",
 								"forward_port": 8080,
+								"listen_port": 80,
+								"listen_port_ssl": 443,
 								"access_list_id": 0,
 								"certificate_id": 0,
 								"ssl_forced": false,

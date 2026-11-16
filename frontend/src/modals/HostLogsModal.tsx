@@ -22,7 +22,7 @@ const HostLogsModal = EasyModal.create(({ id, visible, remove }: Props) => {
 		<Modal show={visible} onHide={remove} size="lg" scrollable>
 			{!isLoading && error && (
 				<Alert variant="danger" className="m-3">
-					{error?.message || "Unknown error"}
+					<T id={error?.message || "error.generic"} />
 				</Alert>
 			)}
 			<Modal.Header closeButton>

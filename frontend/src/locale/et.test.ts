@@ -7,6 +7,7 @@ const estonian = et as Record<string, { defaultMessage: string }>;
 
 // Brand names, codes and ICU-only strings can stay the same as English.
 const allowedIdentical = new Set([
+	"app.title",
 	"certificates.key-type-ecdsa",
 	"certificates.key-type-rsa",
 	"column.ssl",

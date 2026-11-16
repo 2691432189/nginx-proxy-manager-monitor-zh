@@ -50,7 +50,7 @@ export default function Setup() {
 					setErrorMsg(err.message);
 				}
 			} else {
-				setErrorMsg("cannot_create_user");
+				setErrorMsg("error.generic");
 			}
 		} catch (err: any) {
 			setErrorMsg(err.message);
@@ -74,7 +74,7 @@ export default function Setup() {
 				</div>
 				<div className="card card-md">
 					<Alert variant="danger" show={!!errorMsg} onClose={() => setErrorMsg(null)} dismissible>
-						{errorMsg}
+						<T id={errorMsg || "error.generic"} />
 					</Alert>
 					<Formik
 						initialValues={

@@ -65,7 +65,7 @@ const UserModal = EasyModal.create(({ id, visible, remove }: Props) => {
 				<Modal show={visible} onHide={remove}>
 					{!isLoading && (error || currentError) && (
 						<Alert variant="danger" className="m-3">
-							{error?.message || currentError?.message || "Unknown error"}
+							<T id={error?.message || currentError?.message || "error.generic"} />
 						</Alert>
 					)}
 					{(isLoading || currentIsLoading) && <Loading noLogo />}

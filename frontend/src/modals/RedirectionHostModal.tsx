@@ -15,7 +15,7 @@ import {
 } from "src/components";
 import { FormModal } from "src/components/Form";
 import { useRedirectionHost, useSetRedirectionHost, useUser } from "src/hooks";
-import { T } from "src/locale";
+import { t, T } from "src/locale";
 import { validateString } from "src/modules/Validations";
 import { showObjectSuccess } from "src/notifications";
 
@@ -69,7 +69,7 @@ const RedirectionHostModal = EasyModal.create(({ id, visible, remove }: Props) =
 				<Modal show={visible} onHide={remove}>
 					{!isLoading && (error || userError) && (
 						<Alert variant="danger" className="m-3">
-							{error?.message || userError?.message || "Unknown error"}
+							<T id={error?.message || userError?.message || "error.generic"} />
 						</Alert>
 					)}
 					{(isLoading || userIsLoading) && <Loading noLogo />}
@@ -147,7 +147,7 @@ const RedirectionHostModal = EasyModal.create(({ id, visible, remove }: Props) =
 													<a
 														href="#tab-advanced"
 														className="nav-link"
-														title="Settings"
+														title={t("settings")}
 														data-bs-toggle="tab"
 														aria-selected="false"
 														tabIndex={-1}

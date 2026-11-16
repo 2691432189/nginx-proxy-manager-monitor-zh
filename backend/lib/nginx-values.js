@@ -111,6 +111,13 @@ export const assertHostRenderable = (hostType, host) => {
 	}
 
 	if (hostType === "proxy_host") {
+		for (const field of ["listen_port", "listen_port_ssl"]) {
+			const value = host[field];
+			if (typeof value !== "undefined" && value !== null) {
+				check(Number.isInteger(value) && value >= 1 && value <= 65535, field.replace(/_/g, " "), value);
+			}
+		}
+
 		check(isTokenSafe(host.forward_host), "forward host", host.forward_host);
 		assertAccessListRenderable(label, host.access_list);
 		for (const loc of host.locations || []) {

@@ -1,5 +1,6 @@
+import { FormattedMessage } from "react-intl";
 import { useCheckVersion, useHealth } from "src/hooks";
-import { T } from "src/locale";
+import { t, T } from "src/locale";
 
 export function SiteFooter() {
 	const health = useHealth();
@@ -21,7 +22,7 @@ export function SiteFooter() {
 						<ul className="list-inline list-inline-dots mb-0">
 							<li className="list-inline-item">
 								<a
-									href="https://github.com/NginxProxyManager/nginx-proxy-manager"
+									href="https://github.com/2691432189/nginx-proxy-manager-monitor-zh"
 									target="_blank"
 									className="link-secondary"
 									rel="noopener"
@@ -40,10 +41,44 @@ export function SiteFooter() {
 								</a>
 							</li>
 							<li className="list-inline-item">
-								Theme by{" "}
+								<T id="footer.theme" />{" "}
 								<a href="https://tabler.io" rel="noreferrer" target="_blank" className="link-secondary">
 									Tabler
 								</a>
+							</li>
+							<li className="list-inline-item">
+								<FormattedMessage
+									id="footer.translate"
+									values={{
+										link: (chunks) => (
+											<a
+												href="https://github.com/xiaoxinpro/nginx-proxy-manager-zh"
+												rel="noreferrer"
+												target="_blank"
+												className="link-secondary"
+											>
+												{chunks}
+											</a>
+										),
+									}}
+								/>
+							</li>
+							<li className="list-inline-item">
+								<FormattedMessage
+									id="footer.translate-two"
+									values={{
+										link: (chunks) => (
+											<a
+												href="https://github.com/2691432189/nginx-proxy-manager-monitor-zh"
+												rel="noreferrer"
+												target="_blank"
+												className="link-secondary"
+											>
+												{chunks}
+											</a>
+										),
+									}}
+								/>
 							</li>
 							<li className="list-inline-item">
 								<a
@@ -63,7 +98,7 @@ export function SiteFooter() {
 										className="link-warning fw-bold"
 										target="_blank"
 										rel="noopener"
-										title={`New version ${versionData.latest} is available`}
+										title={t("update-available", { latestVersion: versionData.latest })}
 									>
 										<T id="update-available" data={{ latestVersion: versionData.latest }} />
 									</a>

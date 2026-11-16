@@ -11,6 +11,8 @@ const fetchProxyHost = (id: number | "new") => {
 			domainNames: [],
 			forwardHost: "",
 			forwardPort: 0,
+			listenPort: 80,
+			listenPortSsl: 443,
 			accessListId: 0,
 			certificateId: 0,
 			sslForced: false,

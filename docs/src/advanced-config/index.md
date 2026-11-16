@@ -266,3 +266,80 @@ And you'll probably want to expose that port as well
 ```
 
 Then you'll be able to access admin UI at `http://localhost:8000`
+
+## Custom listen ports for Proxy Hosts
+
+Proxy Hosts can use a custom HTTP and HTTPS listening port instead of the default `80` and `443`.
+The ports are set per host in the Proxy Host details:
+
+- **HTTP Listen Port** defaults to `80` and is always used.
+- **HTTPS Listen Port** defaults to `443` and is only used when a certificate is selected for the host. If no certificate is selected, the host only has an HTTP listener; the HTTPS port is stored and validated, but it is not rendered into the nginx configuration.
+
+Ports must be integers between `1` and `65535`. When a host uses a non-default port, visitors must include the port in the URL (for example, `https://example.com:8443`).
+
+### Publish custom ports in Docker
+
+`EXPOSE` in an image is metadata only; it does not publish a port. Every custom listen port must also be published in `docker-compose.yml` (or with `docker run -p`), otherwise it is not reachable from outside the container network.
+
+```yml
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:{{VERSION}}'
+    restart: unless-stopped
+    ports:
+      - '80:80'       # HTTP, also required for Let's Encrypt HTTP-01
+      - '443:443'     # HTTPS
+      - '81:81'       # Admin UI (change both sides if NPM_ADMIN_PORT is set)
+      - '8080:8080'   # Example custom HTTP listen port
+      - '8443:8443'   # Example custom HTTPS listen port
+```
+
+If `NPM_ADMIN_PORT` is changed, publish that port instead of `81` on both sides of the mapping. With `network_mode: host`, no port mapping is needed; the host firewall must allow the ports.
+
+### Port rules
+
+- Port `80` always serves plain HTTP, and Let's Encrypt HTTP-01 challenges also use port `80` regardless of a host's HTTP listen port. Port `443` always serves TLS and remains the default HTTPS port. A host's HTTP listen port cannot be `443`, and its HTTPS listen port cannot be `80`.
+- A port cannot serve plain HTTP for one Proxy Host and TLS for another enabled Proxy Host. nginx requires the same `listen` options for every server on an address and port, so a mismatch would make it reject the generated configuration. For example, if one host listens on `8080` for HTTP, another enabled host cannot use `8080` for HTTPS.
+- When a host has a certificate, its HTTP and HTTPS listen ports must be different.
+
+A host without a certificate only listens on its HTTP port, so its HTTPS port does not create a TLS listener or conflict with one. The stored value is still validated, and it is checked against other hosts when a certificate is added.
+
+### Port conflicts
+
+NPM validates the listen ports when a Proxy Host is created, when its listen ports, certificate, or enabled state change, and when it is re-enabled. Other updates skip the check. A conflict returns HTTP `400` and the change is rejected. The following are rejected:
+
+- values that are not integers between `1` and `65535`
+- port `3000`, which is used by the NPM backend
+- the admin UI port (`81`, or `NPM_ADMIN_PORT` when configured). If you mount your own `production.conf`, NPM cannot read its `listen` port, so keep the reserved port in sync with `NPM_ADMIN_PORT`
+- `443` for HTTP, or `80` for HTTPS
+- equal HTTP and HTTPS ports on a host with a certificate
+- an HTTP listen port already used for HTTPS by another enabled Proxy Host
+- an HTTPS listen port already used for HTTP by another enabled Proxy Host when the host has a certificate
+- a port used by an enabled TCP Stream
+
+When the container uses `network_mode: host`, nginx binds directly to host ports. NPM cannot detect a conflict with another service already using a port on the host, and `nginx -t` does not perform a bind check, so a reload can appear to succeed while nginx cannot listen. Make sure the port is free on the host before saving the Proxy Host.
+
+The check only runs in one direction: saving a Proxy Host looks at existing Streams, but saving a TCP Stream does not look at existing Proxy Hosts. If you add a Stream after a Proxy Host, make sure the Stream's incoming port is not already used by a Proxy Host.
+
+### Unknown hosts on custom ports
+
+The built-in listeners on `80` and `443` have fallback/default servers, and the fallback on `443` enables `ssl_reject_handshake`. Custom ports do not get an equivalent `default_server`. If a request arrives on a custom port with a Host header or TLS SNI that does not match any Proxy Host:
+
+- nginx uses the first Proxy Host configured on that port.
+- on a custom HTTPS port, the client receives that first host's certificate and content.
+
+For high-security deployments, continue to use the default HTTPS port `443`, which rejects unknown SNI.
+
+### HSTS and custom HTTPS ports
+
+HSTS is configured per host and applies to the host name, not to a port. If a Proxy Host uses a custom HTTPS port and HSTS is enabled, a browser that has seen the HSTS header may upgrade later requests to port `443` instead of the custom port. Do not combine HSTS with a custom HTTPS port; use the default `443` if you need HSTS.
+
+### Certificates and port 80
+
+Let's Encrypt HTTP-01 validation always connects to port `80`, not to the HTTP listen port configured on the Proxy Host. If you issue or renew certificates with HTTP-01, the container must keep publishing port `80`, and that port must be reachable from the public internet.
+
+If port `80` is not available, use a DNS-01 challenge instead. A custom HTTPS port does not affect certificate selection: nginx still selects the certificate by SNI.
+
+### Custom nginx configuration and force-ssl.conf
+
+`conf.d/include/force-ssl.conf` is an internal include used by the generated host configuration. It expects `$npm_ssl_redirect_host` to be set by the host template; do not include it directly from a custom configuration. If you do, set that variable first, otherwise `nginx -t` fails with an unknown variable.

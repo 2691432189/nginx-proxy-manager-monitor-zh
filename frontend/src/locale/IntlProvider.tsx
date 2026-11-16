@@ -137,6 +137,9 @@ const changeLocale = (locale: string): void => {
 	applyDocumentLocale(locale);
 };
 
+// Translate a message id outside of JSX (document title, aria-label, title attributes, etc.)
+const t = (id: string, data?: Record<string, string | number | undefined>) => intl.formatMessage({ id }, data);
+
 // This is a translation component that wraps the translation in a span with a data
 // attribute so devs can inspect the element to see the translation ID
 const T = ({
@@ -170,4 +173,15 @@ const T = ({
 
 //console.log("L:", localeOptions);
 
-export { localeOptions, loadMessages, getFlagCodeForLocale, getLocale, isRTLLocale, createIntl, changeLocale, intl, T };
+export {
+	localeOptions,
+	loadMessages,
+	getFlagCodeForLocale,
+	getLocale,
+	isRTLLocale,
+	createIntl,
+	changeLocale,
+	intl,
+	t,
+	T,
+};

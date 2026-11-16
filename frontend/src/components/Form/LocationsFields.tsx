@@ -12,7 +12,7 @@ import cn from "classnames";
 import { useFormikContext } from "formik";
 import { useRef, useState } from "react";
 import type { ProxyLocation } from "src/api/backend";
-import { intl, T } from "src/locale";
+import { intl, t, T } from "src/locale";
 import { AccessField } from "./AccessField";
 import styles from "./LocationsFields.module.css";
 
@@ -220,7 +220,9 @@ export function LocationsFields({ initialValues, name = "locations", allowAdvanc
 									<div className="row">
 										<div className={allowAdvanced ? "col-md-10" : "col-md-12"}>
 											<div className="input-group mb-3">
-												<span className="input-group-text">Location</span>
+												<span className="input-group-text">
+													<T id="location.label" />
+												</span>
 												<input
 													type="text"
 													className="form-control"
@@ -236,7 +238,7 @@ export function LocationsFields({ initialValues, name = "locations", allowAdvanc
 												<button
 													type="button"
 													className="btn p-0"
-													title="Advanced"
+													title={t("domains.advanced")}
 													aria-expanded={advVisible.includes(row.id)}
 													onClick={() => toggleAdvVisible(row.id)}
 												>

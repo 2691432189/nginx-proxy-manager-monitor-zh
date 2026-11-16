@@ -145,6 +145,8 @@ export interface ProxyHost {
 	forwardScheme: string;
 	forwardHost: string;
 	forwardPort: number;
+	listenPort: number;
+	listenPortSsl: number;
 	accessListId: number;
 	certificateId: number;
 	sslForced: boolean;

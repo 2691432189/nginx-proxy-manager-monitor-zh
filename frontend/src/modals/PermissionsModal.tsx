@@ -146,7 +146,7 @@ const PermissionsModal = EasyModal.create(({ id, visible, remove }: Props) => {
 				<Modal show={visible} onHide={remove}>
 					{!isLoading && error && (
 						<Alert variant="danger" className="m-3">
-							{error?.message || "Unknown error"}
+							<T id={error?.message || "error.generic"} />
 						</Alert>
 					)}
 					{isLoading && <Loading noLogo />}

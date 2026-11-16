@@ -18,7 +18,7 @@ import {
 } from "src/components";
 import { FormModal } from "src/components/Form";
 import { useProxyHost, useSetProxyHost, useUser } from "src/hooks";
-import { T } from "src/locale";
+import { t, T } from "src/locale";
 import { MANAGE, PROXY_HOSTS } from "src/modules/Permissions";
 import { validateNumber, validateString } from "src/modules/Validations";
 import { showObjectSuccess } from "src/notifications";
@@ -78,7 +78,7 @@ const ProxyHostModal = EasyModal.create(({ id, visible, remove }: Props) => {
 				<Modal show={visible} onHide={remove}>
 					{!isLoading && (error || userError) && (
 						<Alert variant="danger" className="m-3">
-							{error?.message || userError?.message || "Unknown error"}
+							<T id={error?.message || userError?.message || "error.generic"} />
 						</Alert>
 					)}
 					{(isLoading || userIsLoading) && <Loading noLogo />}
@@ -96,6 +96,8 @@ const ProxyHostModal = EasyModal.create(({ id, visible, remove }: Props) => {
 							forwardScheme: data?.forwardScheme || "http",
 							forwardHost: data?.forwardHost || "",
 							forwardPort: data?.forwardPort || undefined,
+							listenPort: data?.listenPort ?? 80,
+							listenPortSsl: data?.listenPortSsl ?? 443,
 							accessListId: data?.accessListId || 0,
 							cachingEnabled: data?.cachingEnabled || false,
 							blockExploits: data?.blockExploits || false,
@@ -170,7 +172,7 @@ const ProxyHostModal = EasyModal.create(({ id, visible, remove }: Props) => {
 													<a
 														href="#tab-advanced"
 														className="nav-link"
-														title="Settings"
+														title={t("settings")}
 														data-bs-toggle="tab"
 														aria-selected="false"
 														tabIndex={-1}
@@ -273,6 +275,78 @@ const ProxyHostModal = EasyModal.create(({ id, visible, remove }: Props) => {
 																			{form.errors.forwardPort &&
 																			form.touched.forwardPort
 																				? form.errors.forwardPort
+																				: null}
+																		</div>
+																	) : null}
+																</div>
+															)}
+														</Field>
+													</div>
+												</div>
+												<div className="row">
+													<div className="col-sm-6 col-md-6">
+														<Field name="listenPort" validate={validateNumber(1, 65535)}>
+															{({ field, form }: any) => (
+																<div className="mb-3">
+																	<label
+																		className="form-label text-nowrap"
+																		htmlFor="listenPort"
+																	>
+																		<T id="proxy-host.listen-port" />
+																	</label>
+																	<input
+																		id="listenPort"
+																		type="number"
+																		min={1}
+																		max={65535}
+																		className={`form-control ${form.errors.listenPort && form.touched.listenPort ? "is-invalid" : ""}`}
+																		required
+																		placeholder="80"
+																		{...field}
+																	/>
+																	<div className="text-secondary small">
+																		<T id="proxy-host.listen-port-help" />
+																	</div>
+																	{form.errors.listenPort ? (
+																		<div className="invalid-feedback">
+																			{form.errors.listenPort &&
+																			form.touched.listenPort
+																				? form.errors.listenPort
+																				: null}
+																		</div>
+																	) : null}
+																</div>
+															)}
+														</Field>
+													</div>
+													<div className="col-sm-6 col-md-6">
+														<Field name="listenPortSsl" validate={validateNumber(1, 65535)}>
+															{({ field, form }: any) => (
+																<div className="mb-3">
+																	<label
+																		className="form-label text-nowrap"
+																		htmlFor="listenPortSsl"
+																	>
+																		<T id="proxy-host.listen-port-ssl" />
+																	</label>
+																	<input
+																		id="listenPortSsl"
+																		type="number"
+																		min={1}
+																		max={65535}
+																		className={`form-control ${form.errors.listenPortSsl && form.touched.listenPortSsl ? "is-invalid" : ""}`}
+																		required
+																		placeholder="443"
+																		{...field}
+																	/>
+																	<div className="text-secondary small">
+																		<T id="proxy-host.listen-port-ssl-help" />
+																	</div>
+																	{form.errors.listenPortSsl ? (
+																		<div className="invalid-feedback">
+																			{form.errors.listenPortSsl &&
+																			form.touched.listenPortSsl
+																				? form.errors.listenPortSsl
 																				: null}
 																		</div>
 																	) : null}

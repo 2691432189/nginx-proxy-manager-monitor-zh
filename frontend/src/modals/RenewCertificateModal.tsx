@@ -57,10 +57,14 @@ const RenewCertificateModal = EasyModal.create(({ id, visible, remove }: Props) 
 				{isLoading && <Loading noLogo />}
 				{!isLoading && error && (
 					<Alert variant="danger" className="m-3">
-						{error?.message || "Unknown error"}
+						{error?.message || <T id="error.generic" />}
 					</Alert>
 				)}
-				{data && isSubmitting && !errorMsg ? <p className="text-center mt-3">Please wait ...</p> : null}
+				{data && isSubmitting && !errorMsg ? (
+					<p className="text-center mt-3">
+						<T id="loading" />
+					</p>
+				) : null}
 			</Modal.Body>
 			<Modal.Footer>
 				<Button data-bs-dismiss="modal" onClick={remove} disabled={isSubmitting}>

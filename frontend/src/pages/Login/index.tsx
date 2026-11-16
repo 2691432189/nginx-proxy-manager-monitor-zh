@@ -37,7 +37,11 @@ function TwoFactorForm() {
 			<p className="text-secondary text-center mb-4">
 				<T id="login.2fa-description" />
 			</p>
-			{formErr !== "" && <Alert variant="danger">{formErr}</Alert>}
+			{formErr !== "" && (
+				<Alert variant="danger">
+					<T id={formErr} />
+				</Alert>
+			)}
 			<Formik initialValues={{ code: "" }} onSubmit={onSubmit}>
 				{({ isSubmitting }) => (
 					<Form>
@@ -103,7 +107,11 @@ function LoginForm() {
 			<h2 className="h2 text-center mb-4">
 				<T id="login.title" />
 			</h2>
-			{formErr !== "" && <Alert variant="danger">{formErr}</Alert>}
+			{formErr !== "" && (
+				<Alert variant="danger">
+					<T id={formErr} />
+				</Alert>
+			)}
 			<Formik
 				initialValues={
 					{

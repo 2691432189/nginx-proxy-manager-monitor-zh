@@ -143,6 +143,9 @@
 	"action.view-details": {
 		"defaultMessage": "View Details"
 	},
+	"app.title": {
+		"defaultMessage": "Nginx Proxy Manager"
+	},
 	"auditlogs": {
 		"defaultMessage": "Audit Logs"
 	},
@@ -401,6 +404,12 @@
 	"error.access.duplicate-usernames": {
 		"defaultMessage": "Authorization Usernames must be unique"
 	},
+	"error.generic": {
+		"defaultMessage": "Something went wrong. Please try again."
+	},
+	"error.invalid-2fa": {
+		"defaultMessage": "Invalid verification code"
+	},
 	"error.invalid-auth": {
 		"defaultMessage": "Invalid email or password"
 	},
@@ -436,6 +445,15 @@
 	},
 	"footer.github-fork": {
 		"defaultMessage": "Fork me on Github"
+	},
+	"footer.theme": {
+		"defaultMessage": "Theme by"
+	},
+	"footer.translate": {
+		"defaultMessage": "Chinese translation by <link>xiaoxinpro</link>."
+	},
+	"footer.translate-two": {
+		"defaultMessage": "Monitoring edition by <link>2691432189</link>."
 	},
 	"form.unsaved-changes": {
 		"defaultMessage": "You have unsaved changes. Are you sure you want to discard them?"
@@ -484,6 +502,9 @@
 	},
 	"location.filter": {
 		"defaultMessage": "Filter by path or destination"
+	},
+	"location.label": {
+		"defaultMessage": "Location"
 	},
 	"login.2fa-code": {
 		"defaultMessage": "Verification Code"
@@ -547,6 +568,12 @@
 	},
 	"logs.truncated-warning": {
 		"defaultMessage": "Only the most recent portion of this file is shown."
+	},
+	"nav.toggle": {
+		"defaultMessage": "Toggle navigation"
+	},
+	"nav.user-menu": {
+		"defaultMessage": "Open user menu"
 	},
 	"nginx-config.label": {
 		"defaultMessage": "Custom Nginx Configuration"
@@ -677,6 +704,18 @@
 	"proxy-host.forward-host": {
 		"defaultMessage": "Forward Hostname / IP"
 	},
+	"proxy-host.listen-port": {
+		"defaultMessage": "HTTP Listen Port"
+	},
+	"proxy-host.listen-port-help": {
+		"defaultMessage": "Port the container listens on for HTTP. Publish it in Docker, for example -p 8080:8080."
+	},
+	"proxy-host.listen-port-ssl": {
+		"defaultMessage": "HTTPS Listen Port"
+	},
+	"proxy-host.listen-port-ssl-help": {
+		"defaultMessage": "Only used when a certificate is selected."
+	},
 	"proxy-hosts": {
 		"defaultMessage": "Proxy Hosts"
 	},
@@ -794,8 +833,20 @@
 	"streams.udp": {
 		"defaultMessage": "UDP"
 	},
+	"table.empty": {
+		"defaultMessage": "There are no items"
+	},
 	"test": {
 		"defaultMessage": "Test"
+	},
+	"unhealthy.subtitle": {
+		"defaultMessage": "We'll keep checking and hope to be back soon!"
+	},
+	"unhealthy.title": {
+		"defaultMessage": "The API is not healthy."
+	},
+	"unknown": {
+		"defaultMessage": "Unknown"
 	},
 	"update-available": {
 		"defaultMessage": "Update Available: {latestVersion}"

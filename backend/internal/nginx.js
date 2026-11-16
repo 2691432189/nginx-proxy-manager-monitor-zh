@@ -189,6 +189,7 @@ const internalNginx = {
 						{ hsts_subdomains: host.hsts_subdomains },
 						{ access_list: host.access_list },
 						{ certificate: host.certificate },
+						{ listen_port_ssl: host.listen_port_ssl },
 						host.locations[i],
 					);
 

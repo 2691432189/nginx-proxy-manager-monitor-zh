@@ -1,8 +1,10 @@
 import _ from "lodash";
 import errs from "../lib/error.js";
 import { castJsonIfNeed } from "../lib/helpers.js";
+import { validateListenPorts } from "../lib/listen-ports.js";
 import utils from "../lib/utils.js";
 import proxyHostModel, { scopeToOwnerOrAllowed } from "../models/proxy_host.js";
+import streamModel from "../models/stream.js";
 import internalAuditLog from "./audit-log.js";
 import internalCertificate from "./certificate.js";
 import internalHost from "./host.js";
@@ -10,6 +12,74 @@ import internalNginx from "./nginx.js";
 
 const omissions = () => {
 	return ["is_deleted", "owner.is_deleted"];
+};
+
+const hasListenPortChanges = (data, createCertificate, existing) =>
+	typeof data.listen_port !== "undefined" ||
+	typeof data.listen_port_ssl !== "undefined" ||
+	!!createCertificate ||
+	typeof data.certificate_id !== "undefined" ||
+	// Re-enabling through the update endpoint has to re-check the ports like enable() does
+	(typeof data.enabled !== "undefined" && !!data.enabled && !!existing && !existing.enabled);
+
+/**
+ * Merge the incoming ports with the stored ones, then validate them.
+ *
+ * @param   {Object}   data
+ * @param   {Object}   [existing]
+ * @param   {Boolean}  [createCertificate]
+ * @returns {Promise<Object>}
+ */
+const normaliseListenPorts = async (data, existing, createCertificate, includeHostDetails = true) => {
+	if (!hasListenPortChanges(data, createCertificate, existing)) {
+		return data;
+	}
+
+	const httpPort = typeof data.listen_port !== "undefined" ? data.listen_port : existing ? existing.listen_port : 80;
+	const sslPort =
+		typeof data.listen_port_ssl !== "undefined" ? data.listen_port_ssl : existing ? existing.listen_port_ssl : 443;
+
+	const hasCertificate =
+		!!createCertificate ||
+		(typeof data.certificate_id !== "undefined" ? Number(data.certificate_id) > 0 : !!existing?.certificate_id);
+
+	const [otherHosts, tcpStreams] = await Promise.all([
+		proxyHostModel
+			.query()
+			.where("is_deleted", 0)
+			.andWhere("enabled", 1)
+			.whereNot("id", existing?.id || 0)
+			.select("id", "domain_names", "listen_port", "listen_port_ssl", "certificate_id"),
+		streamModel
+			.query()
+			.where("is_deleted", 0)
+			.andWhere("enabled", 1)
+			.andWhere("tcp_forwarding", 1)
+			.select("id", "incoming_port"),
+	]);
+
+	const ports = validateListenPorts({
+		httpPort,
+		sslPort,
+		hasCertificate,
+		includeHostDetails,
+		otherHosts: otherHosts.map((host) => ({
+			id: host.id,
+			domain_names: host.domain_names,
+			listen_port: host.listen_port,
+			listen_port_ssl: host.listen_port_ssl,
+			has_certificate: !!host.certificate_id,
+		})),
+		tcpStreams: tcpStreams.map((stream) => ({
+			id: stream.id,
+			incoming_port: stream.incoming_port,
+		})),
+	});
+
+	data.listen_port = ports.httpPort;
+	data.listen_port_ssl = ports.sslPort;
+
+	return data;
 };
 
 const internalProxyHost = {
@@ -46,10 +116,11 @@ const internalProxyHost = {
 					});
 				});
 			})
-			.then(() => {
+			.then(async () => {
 				// At this point the domains should have been checked
 				thisData.owner_user_id = access.token.getUserId(1);
 				thisData = internalHost.cleanSslHstsData(thisData);
+				thisData = await normaliseListenPorts(thisData, null, createCertificate, access.isAdmin());
 
 				// Fix for db field not having a default value
 				// for this optional field.
@@ -117,6 +188,7 @@ const internalProxyHost = {
 	 */
 	update: (access, data) => {
 		let thisData = data;
+		let wasEnabled = null;
 		const createCertificate = thisData.certificate_id === "new";
 
 		if (createCertificate) {
@@ -149,7 +221,7 @@ const internalProxyHost = {
 			.then(() => {
 				return internalProxyHost.get(access, { id: thisData.id });
 			})
-			.then((row) => {
+			.then(async (row) => {
 				if (row.id !== thisData.id) {
 					// Sanity check that something crazy hasn't happened
 					throw new errs.InternalValidationError(
@@ -157,8 +229,15 @@ const internalProxyHost = {
 					);
 				}
 
+				wasEnabled = !!row.enabled;
+
 				// Before the certificate is created, so a refused request doesn't leave one behind
 				internalHost.assertAdvancedConfigAllowed(access, thisData, row);
+
+				if (createCertificate) {
+					// Also check the ports before requesting the certificate, so a refused update doesn't leave one behind
+					await normaliseListenPorts(thisData, row, true, access.isAdmin());
+				}
 
 				if (createCertificate) {
 					return internalCertificate
@@ -176,7 +255,7 @@ const internalProxyHost = {
 				}
 				return row;
 			})
-			.then((row) => {
+			.then(async (row) => {
 				// Add domain_names to the data in case it isn't there, so that the audit log renders correctly. The order is important here.
 				thisData = _.assign(
 					{},
@@ -186,6 +265,7 @@ const internalProxyHost = {
 					data,
 				);
 
+				thisData = await normaliseListenPorts(thisData, row, createCertificate, access.isAdmin());
 				thisData = internalHost.cleanSslHstsData(thisData, row);
 
 				return proxyHostModel
@@ -215,7 +295,11 @@ const internalProxyHost = {
 					})
 					.then(async (row) => {
 						if (!row.enabled) {
-							// No need to add nginx config if host is disabled
+							// A PUT can also disable a host; remove its config like disable() does
+							if (wasEnabled) {
+								await internalNginx.deleteConfig("proxy_host", row);
+								await internalNginx.reload();
+							}
 							return row;
 						}
 						// Configure nginx
@@ -338,6 +422,14 @@ const internalProxyHost = {
 				if (row.enabled) {
 					throw new errs.ValidationError("Host is already enabled");
 				}
+
+				// A disabled host has no nginx config, so re-check the ports before it comes back
+				await normaliseListenPorts(
+					{ listen_port: row.listen_port ?? 80, listen_port_ssl: row.listen_port_ssl ?? 443 },
+					row,
+					false,
+					access.isAdmin(),
+				);
 
 				row.enabled = 1;
 

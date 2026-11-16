@@ -225,7 +225,9 @@ export default function LogViewer() {
 
 			{tailQuery.isError && (
 				<div className="card-body">
-					<Alert variant="danger">{tailQuery.error?.message || "Unknown error"}</Alert>
+					<Alert variant="danger">
+						<T id={tailQuery.error?.message || "error.generic"} />
+					</Alert>
 				</div>
 			)}
 

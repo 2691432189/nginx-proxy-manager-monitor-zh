@@ -9,11 +9,15 @@ set -e
 log_info 'Admin Port ...'
 
 NPM_ADMIN_PORT="${NPM_ADMIN_PORT:-81}"
-# ensure admin port is a number
-if ! [[ "$NPM_ADMIN_PORT" =~ ^[0-9]+$ ]]; then
-	echo "WARNING: NPM_ADMIN_PORT must be a number. Defaulting to 81" >&2
+# Trim surrounding whitespace, and keep the same validation as the backend: a decimal
+# integer between 1 and 65535. Anything else falls back to 81.
+NPM_ADMIN_PORT="$(printf '%s' "$NPM_ADMIN_PORT" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+if ! [[ "$NPM_ADMIN_PORT" =~ ^[0-9]+$ ]] || [ "$NPM_ADMIN_PORT" -lt 1 ] || [ "$NPM_ADMIN_PORT" -gt 65535 ]; then
+	echo "WARNING: NPM_ADMIN_PORT must be an integer between 1 and 65535. Defaulting to 81" >&2
 	NPM_ADMIN_PORT=81
 fi
+# Normalise leading zeroes so the generated nginx config and the backend agree
+NPM_ADMIN_PORT="$((10#$NPM_ADMIN_PORT))"
 
 PRODFILE="/etc/nginx/conf.d/production.conf"
 

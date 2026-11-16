@@ -1,16 +1,21 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import EasyModal from "ez-modal-react";
+import { useEffect } from "react";
 import { RawIntlProvider } from "react-intl";
 import { ToastContainer } from "react-toastify";
 import { AuthProvider, LocaleProvider, ThemeProvider } from "src/context";
-import { getLocale, intl, isRTLLocale } from "src/locale";
+import { getLocale, intl, isRTLLocale, t } from "src/locale";
 import Router from "src/Router.tsx";
 
 // Create a client
 const queryClient = new QueryClient();
 
 function App() {
+	useEffect(() => {
+		document.title = t("app.title");
+	}, []);
+
 	return (
 		<RawIntlProvider value={intl}>
 			<LocaleProvider>
