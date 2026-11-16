@@ -8,8 +8,12 @@
 
 本项目是基于 [nginx-proxy-manager-zh](https://github.com/xiaoxinpro/nginx-proxy-manager-zh) 的可监听端口版本，该项目属于一个预构建的docker映像，它可以让你轻松地部署到你的网站上运行，包括免费的SSL，而不需要知道太多关于 Nginx 或 Let's Encrypt 的信息。  
 
-![](http://image.xiaoxin.pro/2022/05/16/75687b5bfffbe.png)
-![](https://webcdn.koufengqi.cn/other/72d55ee6195f694b54a724b9b708e94.png)
+<img width="2122" height="1333" alt="image" src="https://github.com/user-attachments/assets/7e51dd2b-799e-4421-bd95-d06f87871ca0" />
+
+
+<img width="1569" height="1397" alt="image" src="https://github.com/user-attachments/assets/b3546cf5-e1df-4884-9c3e-09656328a5fa" />
+
+
 
 ## 快速部署
 
