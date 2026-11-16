@@ -1,0 +1,22 @@
+# Keep the Docker build context small; the Dockerfile only needs backend, docker/rootfs and frontend/dist
+.git
+.github
+**/node_modules
+frontend/src
+frontend/public
+frontend/index.html
+frontend/vite.config.ts
+frontend/tsconfig.json
+frontend/tsconfig.node.json
+frontend/biome.json
+frontend/check-locales.cjs
+frontend/vitest-setup.js
+frontend/package.json
+frontend/yarn.lock
+docs
+test
+backend/test
+README.md
+README-zh.md
+代理主机自定义监听端口.md
+多端口监听技术实现.md

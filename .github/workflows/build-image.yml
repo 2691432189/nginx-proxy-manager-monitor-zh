@@ -1,0 +1,57 @@
+name: Build Docker image
+
+on:
+  push:
+    branches:
+      - v2.17.0
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: yarn
+          cache-dependency-path: frontend/yarn.lock
+
+      - name: Build frontend
+        working-directory: frontend
+        run: |
+          yarn install --frozen-lockfile
+          yarn locale-compile
+          yarn build
+
+      - name: Build image
+        run: |
+          docker build --pull \
+            -f docker/Dockerfile \
+            -t nginx-proxy-manager-monitor-zh:v2.17.0 \
+            --build-arg TARGETPLATFORM=linux/amd64 \
+            --build-arg BUILDPLATFORM=linux/amd64 \
+            --build-arg BUILD_VERSION=2.17.0 \
+            --build-arg BUILD_COMMIT="$GITHUB_SHA" \
+            --build-arg BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            .
+
+      - name: Save image
+        run: |
+          docker save nginx-proxy-manager-monitor-zh:v2.17.0 \
+            | gzip -1 > /tmp/nginx-proxy-manager-monitor-zh-v2.17.0.tar.gz
+          ls -lh /tmp/nginx-proxy-manager-monitor-zh-v2.17.0.tar.gz
+
+      - name: Upload image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nginx-proxy-manager-monitor-zh-v2.17.0
+          path: /tmp/nginx-proxy-manager-monitor-zh-v2.17.0.tar.gz
+          compression-level: 0
+          retention-days: 14
